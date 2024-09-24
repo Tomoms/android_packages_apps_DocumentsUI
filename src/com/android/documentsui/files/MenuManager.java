@@ -330,7 +330,9 @@ public final class MenuManager extends com.android.documentsui.MenuManager {
      */
     @Override
     protected void updateInspect(MenuItem inspect, SidebarEntryItemInfo itemInfo) {
-        Menus.setEnabledAndVisible(inspect, itemInfo.supportsInspect());
+        Menus.setEnabledAndVisible(inspect, itemInfo.supportsInspect() &&
+                (mState.stack.getRoot() == null ||
+                UserId.CURRENT_USER.equals(mState.stack.getRoot().userId)));
     }
 
     @Override
