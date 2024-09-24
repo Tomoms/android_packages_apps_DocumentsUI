@@ -41,6 +41,7 @@ import com.android.documentsui.util.VersionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Interface to query user ids.
@@ -177,44 +178,35 @@ public interface UserIdManager {
                 return result;
             }
 
-            UserId systemUser = null;
-            UserId managedUser = null;
-
-            for (UserHandle userHandle : userProfiles) {
-                if (userHandle.isSystem()) {
-                    systemUser = UserId.of(userHandle);
-                    continue;
+            final UserHandle currentUser = UserHandle.of(mCurrentUser.getIdentifier());
+            final UserHandle profileParent = userManager.getProfileParent(currentUser);
+            if (mCurrentUser.isManagedProfile(userManager)) {
+                // 1. If the current user is a managed user, add the parent user.
+                if (profileParent == null) {
+                    Log.e(TAG, "managed user has no parent!");
+                } else {
+                    result.add(0, UserId.of(profileParent));
                 }
-                if (managedUser == null
-                        && userManager.isManagedProfile(userHandle.getIdentifier())) {
-                    managedUser = UserId.of(userHandle);
-                }
-            }
-
-            if (mCurrentUser.isSystem()) {
-                // 1. If the current user is system (personal), add the managed user.
-                if (managedUser != null) {
-                    result.add(managedUser);
-                }
-            } else if (mCurrentUser.isManagedProfile(userManager)) {
-                // 2. If the current user is a managed user, add the personal user.
-                // Since we don't have MANAGED_USERS permission to get the parent user, we will
-                // treat the system as personal although the system can theoretically in the profile
-                // group but not being the parent user(personal) of the managed user.
-                if (systemUser != null) {
-                    result.add(0, systemUser);
-                }
+            } else if (profileParent == null) {
+                // 2. We are the parent. getProfileParent() is designed to return null for the
+                // parent of the group, or for something that is not a profile. If we were not
+                // either a profile or the parent, we would not be included in userProfiles,
+                // unless userProfiles only had a single element, in which case we would have
+                // returned earlier. We must be the parent, then, so we add any managed profiles.
+                result.addAll(userProfiles.stream()
+                        .map(UserId::of)
+                        .filter(userId ->
+                                !mCurrentUser.equals(userId) && userId.isManagedProfile(userManager)
+                        ).collect(Collectors.toList()));
             } else {
                 // 3. If we cannot resolve the users properly, we will disable the cross-profile
                 // feature by returning just the current user.
                 if (DEBUG) {
-                    Log.w(TAG, "The current user " + UserId.CURRENT_USER
-                            + " is neither system nor managed user. has system user: "
-                            + (systemUser != null));
+                    Log.w(TAG, "The current user " + mCurrentUser.getIdentifier()
+                            + " is neither full nor managed user.");
                 }
             }
-            mSystemUser = systemUser;
-            mManagedUser = managedUser;
+
             return result;
         }
 

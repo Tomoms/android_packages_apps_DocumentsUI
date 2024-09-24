@@ -332,12 +332,16 @@ public final class MenuManager extends com.android.documentsui.MenuManager {
     @Override
     protected void updateInspect(MenuItem inspect) {
         boolean visible = mFeatures.isInspectorEnabled();
-        Menus.setEnabledAndVisible(inspect, visible && mDirDetails.canInspectDirectory());
+        Menus.setEnabledAndVisible(inspect,
+                visible && mDirDetails.canInspectDirectory() && (mState.stack.getRoot() == null
+                        || UserId.CURRENT_USER.equals(mState.stack.getRoot().userId)));
     }
 
     @Override
     protected void updateInspect(MenuItem inspect, SelectionDetails selectionDetails) {
-        boolean visible = mFeatures.isInspectorEnabled() && selectionDetails.size() <= 1;
+        boolean visible = mFeatures.isInspectorEnabled() && selectionDetails.size() <= 1
+                && (mState.stack.getRoot() == null || UserId.CURRENT_USER.equals(
+                mState.stack.getRoot().userId));
         Menus.setEnabledAndVisible(inspect, visible);
     }
 
