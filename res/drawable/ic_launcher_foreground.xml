@@ -1,34 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-     SPDX-FileCopyrightText: 2022 The LineageOS Project
+     SPDX-FileCopyrightText: 2025 The AxionAOSP
      SPDX-License-Identifier: Apache-2.0
 -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:aapt="http://schemas.android.com/aapt"
     android:width="108dp"
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
-  <group>
-    <clip-path
-        android:pathData="M0,0h108v108h-108z"/>
-    <path
-        android:pathData="M108,0H0V108H108V0ZM34,38C31.791,38 30,39.791 30,42V68C30,70.209 31.791,72 34,72H74C76.209,72 78,70.209 78,68V42C78,39.791 76.209,38 74,38H58L54.586,34.586C54.211,34.211 53.702,34 53.172,34H38.828C38.298,34 37.789,34.211 37.414,34.586L34,38Z"
-        android:fillColor="#ffffff"
-        android:fillType="evenOdd"/>
-    <path
-        android:pathData="M28.54,28.54m-72,0a72,72 0,1 1,144 0a72,72 0,1 1,-144 0"
-        android:fillAlpha="0.6">
-      <aapt:attr name="android:fillColor">
-        <gradient
-            android:gradientRadius="72"
-            android:centerX="28.54"
-            android:centerY="28.54"
-            android:type="radial">
-          <item android:offset="0" android:color="#19FFFFFF"/>
-          <item android:offset="1" android:color="#00FFFFFF"/>
-        </gradient>
-      </aapt:attr>
-    </path>
-  </group>
+    <group
+        android:scaleY="0.4"
+        android:scaleX="0.4"
+        android:pivotY="54"
+        android:pivotX="54">
+        <path
+            android:pathData="M22.13,0L85.87,0A22.13,22.13 0,0 1,108 22.13L108,85.87A22.13,22.13 0,0 1,85.87 108L22.13,108A22.13,22.13 0,0 1,0 85.87L0,22.13A22.13,22.13 0,0 1,22.13 0z"
+            android:strokeWidth="0"
+            android:fillColor="#00b378"/>
+        <path
+            android:pathData="M27.99,8.65L80.01,8.65A5.67,5.67 0,0 1,85.68 14.32L85.68,66.34A5.67,5.67 0,0 1,80.01 72.01L27.99,72.01A5.67,5.67 0,0 1,22.32 66.34L22.32,14.32A5.67,5.67 0,0 1,27.99 8.65z"
+            android:strokeAlpha="0.63"
+            android:strokeWidth="0"
+            android:fillColor="#f8f8f8"
+            android:fillAlpha="0.63"/>
+        <path
+            android:pathData="M24.03,14.11L83.97,14.11A5.67,5.67 0,0 1,89.64 19.78L89.64,79.72A5.67,5.67 0,0 1,83.97 85.39L24.03,85.39A5.67,5.67 0,0 1,18.36 79.72L18.36,19.78A5.67,5.67 0,0 1,24.03 14.11z"
+            android:strokeAlpha="0.72"
+            android:strokeWidth="0"
+            android:fillColor="#f8f8f8"
+            android:fillAlpha="0.72"/>
+        <path
+            android:pathData="M20.07,20.15L87.93,20.15A5.67,5.67 0,0 1,93.6 25.82L93.6,93.68A5.67,5.67 0,0 1,87.93 99.35L20.07,99.35A5.67,5.67 0,0 1,14.4 93.68L14.4,25.82A5.67,5.67 0,0 1,20.07 20.15z"
+            android:strokeWidth="0"
+            android:fillColor="#f8f8f8"/>
+        <path
+            android:pathData="m108,60.12v25.75c0,12.22 -9.91,22.13 -22.13,22.13H22.13c-12.22,0 -22.13,-9.91 -22.13,-22.13v-38.86c0,-6.36 5.16,-11.52 11.52,-11.52h32.5c1.96,0 3.88,0.5 5.59,1.45l18.39,10.21c1.71,0.95 3.63,1.45 5.59,1.45h22.89c6.36,0 11.52,5.16 11.52,11.52Z"
+            android:strokeWidth="0"
+            android:fillColor="#004f49"/>
+        <path
+            android:pathData="M54,59.75m-6.48,0a6.48,6.48 0,1 1,12.96 0a6.48,6.48 0,1 1,-12.96 0"
+            android:strokeWidth="0"
+            android:fillColor="#f8f8f8"/>
+        <path
+            android:pathData="M54,59.75m-2.16,0a2.16,2.16 0,1 1,4.32 0a2.16,2.16 0,1 1,-4.32 0"
+            android:strokeWidth="0"
+            android:fillColor="#004f49"/>
+    </group>
 </vector>
+

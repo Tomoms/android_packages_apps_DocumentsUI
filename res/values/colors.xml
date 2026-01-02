@@ -14,6 +14,8 @@
 -->
 
 <resources>
+  <color name="ic_launcher_background">#DFEFE5</color>
+
   <!-- This is the window background, but also the background for anything
        else that needs to manually declare a background matching the "default"
        app background (e.g. the drawer overlay). -->
