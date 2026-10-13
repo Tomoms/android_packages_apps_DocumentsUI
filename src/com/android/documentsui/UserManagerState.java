@@ -922,7 +922,8 @@ public interface UserManagerState {
                 return false;
             }
 
-            return true;
+            return userProperties.getCrossProfileContentSharingStrategy()
+                    == UserProperties.CROSS_PROFILE_CONTENT_SHARING_DELEGATE_FROM_PARENT;
         }
 
         private static boolean isDeviceSupported(Context context) {

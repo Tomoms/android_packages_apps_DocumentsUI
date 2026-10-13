@@ -85,9 +85,7 @@ import com.android.documentsui.services.FileOperationService;
 import com.android.documentsui.sidebar.RootsFragment;
 import com.android.documentsui.ui.DialogController;
 import com.android.documentsui.ui.MessageBuilder;
-import com.android.documentsui.util.CrossProfileUtils;
 import com.android.documentsui.util.VersionUtils;
-import com.android.modules.utils.build.SdkLevel;
 
 import kotlinx.coroutines.Dispatchers;
 
@@ -278,22 +276,8 @@ public class FilesActivity extends BaseActivity implements AbstractActionHandler
                         mDrawer,
                         this::onSearchKeyboardShortcut);
 
-        final Intent moreApps = new Intent(getIntent());
-        moreApps.setComponent(null);
-        moreApps.setPackage(null);
-        if (mState.supportsCrossProfile) {
-            if (mConfigStore.isPrivateSpaceInDocsUIEnabled() && SdkLevel.isAtLeastS()) {
-                mState.canForwardToProfileIdMap = mUserManagerState.getCanForwardToProfileIdMap(
-                        moreApps);
-            } else if (CrossProfileUtils.getCrossProfileResolveInfo(UserId.CURRENT_USER,
-                    getPackageManager(), moreApps, getApplicationContext(),
-                    mConfigStore.isPrivateSpaceInDocsUIEnabled()) != null) {
-                mState.canShareAcrossProfile = true;
-            }
-        }
-
         RootsFragment.show(getSupportFragmentManager(), /* includeApps= */ false,
-                /* intent= */ moreApps);
+                /* intent= */ null);
         if (isUseMaterial3FlagEnabled()) {
             View navRailRoots = findViewById(getRes(R.id.nav_rail_container_roots));
             if (navRailRoots != null) {
@@ -402,7 +386,6 @@ public class FilesActivity extends BaseActivity implements AbstractActionHandler
         state.initAcceptMimes(intent, "*/*");
         state.action = State.ACTION_BROWSE;
         state.allowMultiple = true;
-        state.supportsCrossProfile = true;
 
         // Options specific to the DocumentsActivity.
         assert (!intent.hasExtra(Intent.EXTRA_LOCAL_ONLY));
